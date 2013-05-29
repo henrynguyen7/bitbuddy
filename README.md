@@ -1,4 +1,4 @@
-This web2py project uses the following libraries:
+#This web2py project uses the following libraries:
 
 - bitcoind: https://github.com/bitcoin/bitcoin
 - bitcoinrpc: https://github.com/jgarzik/python-bitcoinrpc
