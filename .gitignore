@@ -1,0 +1,9 @@
+*.log
+tmp
+cache
+errors
+private
+sessions
+uploads
+__init__.py
+__init__.pyc
