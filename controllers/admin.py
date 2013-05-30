@@ -5,4 +5,4 @@ def getBlockcount():
 	blockcount = bitcoind.getblockcount()
 	return dict(message=T(str(blockcount)))
 	#return blockcount
-
+	#
