@@ -8,7 +8,7 @@
 ## - download is for downloading files uploaded in the db (does streaming)
 ## - call exposes all registered services (none by default)
 #########################################################################
-from bitcoinrpc.authproxy import AuthServiceProxy
+
 
 def index():
     """
@@ -74,10 +74,3 @@ def data():
       LOAD('default','data.load',args='tables',ajax=True,user_signature=True)
     """
     return dict(form=crud())
-
-
-def getBlockcount():
-    bitcoind = AuthServiceProxy("http://bitcoinrpc:asdfasdf@127.0.0.1:8332")
-    blockcount = bitcoind.getblockcount()
-    return dict(message=T(str(blockcount)))
-    #return blockcount
