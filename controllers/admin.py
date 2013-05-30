@@ -1,6 +1,6 @@
 import sys
 sys.path.append('../private')
-from bitcoind import bitcoindIP, bitcoindPort, bitcoindUser, bitcoindPass, bitcoindProtocol
+from bitcoind-resources import bitcoindIP, bitcoindPort, bitcoindUser, bitcoindPass, bitcoindProtocol
 from bitcoinrpc.authproxy import AuthServiceProxy
 
 def getBlockcount():
