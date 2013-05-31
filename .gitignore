@@ -1,12 +1,10 @@
 # Manually ignored #
 ####################
-tmp
-cache
-errors
-private
-sessions
-uploads
-*.pyc
+cache/
+errors/
+private/
+sessions/
+uploads/
 
 # Compiled source #
 ###################
@@ -16,6 +14,7 @@ uploads
 *.exe
 *.o
 *.so
+*.pyc
 
 # Packages #
 ############
