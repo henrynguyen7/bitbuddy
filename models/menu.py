@@ -5,15 +5,14 @@
 ## Customize your APP title, subtitle and menus here
 #########################################################################
 
-response.logo = A(B('web',SPAN(2),'py'),XML('&trade;&nbsp;'),
-                  _class="brand",_href="http://www.web2py.com/")
+response.logo = A(B('BitBuddy'), _class="brand",_href="http://bitbuddy.biz/")
 response.title = request.application.replace('_',' ').title()
-response.subtitle = T('customize me!')
+response.subtitle = T('')
 
 ## read more at http://dev.w3.org/html5/markup/meta.name.html
-response.meta.author = 'Your Name <you@example.com>'
-response.meta.description = 'a cool new app'
-response.meta.keywords = 'web2py, python, framework'
+response.meta.author = 'Peter Lecki & Henry Nguyen <admin@bitbuddy.com>'
+response.meta.description = 'Buy and sell with Bitcoins'
+response.meta.keywords = 'bitcoin, bitbuddy, merchant'
 response.meta.generator = 'Web2py Web Framework'
 
 ## your http://google.com/analytics id
@@ -24,7 +23,11 @@ response.google_analytics_id = None
 #########################################################################
 
 response.menu = [
-    (T('Home'), False, URL('default', 'index'), [])
+    (T('Home'), False, URL('default', 'index'), []),
+	(T('About'), False, URL('default', 'index'), []),
+	(T('Buy'), False, URL('default', 'index'), []),
+	(T('Sell'), False, URL('default', 'index'), []),
+	(T('Contact'), False, URL('default', 'index'), [])
 ]
 
 DEVELOPMENT_MENU = True
