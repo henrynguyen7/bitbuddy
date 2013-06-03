@@ -30,6 +30,12 @@ response.menu = [
     (T('Contact'), False, URL('default', 'index'), [])
 ]
 
+response.footerMenu = [
+    (T('BitBuddy'), False, URL('default', 'index'), []),
+    (T('Privacy'), False, URL('default', 'index'), []),
+    (T('Terms'), False, URL('default', 'index'), [])
+]
+
 DEVELOPMENT_MENU = False
 
 #########################################################################
