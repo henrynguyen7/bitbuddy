@@ -1,7 +1,8 @@
-#########################################################################
-## BitBuddy Fixtures (seed data)
-## More info: http://thadeusb.com/weblog/2010/4/21/using_fixtures_in_web2py
-#########################################################################
+"""
+BitBuddy Fixtures (seed data)
+
+More info: http://thadeusb.com/weblog/2010/4/21/using_fixtures_in_web2py
+"""
 
 # Set RESET = TRUE to reset ALL database data
 # Useful for dev/testing... don't let this anywhere near production

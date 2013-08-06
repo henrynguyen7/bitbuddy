@@ -1,0 +1,5 @@
+bitcoindUser = "bitcoinrpc"
+bitcoindPass = "asdfasdf"
+bitcoindIP = "127.0.0.1"
+bitcoindPort = "8332"
+bitcoindProtocol = "http://"
