@@ -22,7 +22,7 @@
         response.files.append(URL('static','css/bootstrap.min.css'))
         response.files.append(URL('static','css/bootstrap-responsive.min.css'))
         response.files.append(URL('static','css/web2py_bootstrap.css'))
-        response.files.append(URL('static','css/custom.css'))
+        response.files.append(URL('static','css/custom_marketing.css'))
         }}
 
         {{include 'web2py_ajax.html'}}
@@ -58,15 +58,13 @@
                         <form class="navbar-form pull-right" action="/bitbuddy/default/user/register">
                             <button type="submit" class="btn btn-success">Sign Up</button>
                         </form>
-                        <form class="navbar-form pull-right" action="/bitbuddy/default/user/logout">
-                            <button type="submit" class="btn">Log Out</button>
-                        </form>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="container">
+            <!-- Center ================================================== -->
             {{block center}}  
             {{include}}
             {{end}}
