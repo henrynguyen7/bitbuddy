@@ -1,10 +1,12 @@
 # Manually ignored #
 ####################
 cache/
+databases/
 errors/
 private/
 sessions/
 uploads/
+
 
 # Compiled source #
 ###################

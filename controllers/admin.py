@@ -1,13 +1,10 @@
-import sys
-sys.path.append('../private')
-from bitcoind-resources import bitcoindIP, bitcoindPort, bitcoindUser, bitcoindPass, bitcoindProtocol
-from bitcoinrpc.authproxy import AuthServiceProxy
+# Runs all modules with the latest changes instead of cached version, useful for dev
+from gluon.custom_import import track_changes
+track_changes(True)
+
+from bitcoin_client import BitcoinClient
 
 def getBlockcount():
-	bitcoind = AuthServiceProxy(bitcoindProtocol + bitcoindUser + ":" + bitcoindPass + "@" + bitcoindIP + ":" + bitcoindPort) 
-	blockcount = bitcoind.getblockcount() 
-	return dict(message=T(str(blockcount)))
-	#return blockcount
-	#print(blockcount)
-
-#getBlockcount()
+    client = BitcoinClient()
+    blockcount = client.getblockcount()
+    return dict(message=T(str(blockcount)))
