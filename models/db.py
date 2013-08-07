@@ -6,7 +6,7 @@
 
 from mysql_resources import mysqlUser, mysqlPassword, mysqlDatabase, mysqlPort, mysqlHost
 
-db = DAL('mysql://' + mysqlUser + ':' mysqlPassword + '@' + mysqlHost + '/' + mysqlDatabase, pool_size=1, check_reserved=['mysql'])
+db = DAL('mysql://' + mysqlUser + ':' + mysqlPassword + '@' + mysqlHost + '/' + mysqlDatabase, pool_size=1, check_reserved=['mysql'])
 
 ## by default give a view/generic.extension to all actions from localhost
 ## none otherwise. a pattern can be 'controller/function.extension'
