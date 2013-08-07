@@ -14,16 +14,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <!-- Speaking of Google, don't forget to set your site up: http://google.com/webmasters -->
         <meta name="google-site-verification" content="" />
-        <link href="../static/images/favicon.ico" rel="shortcut icon" type="image/x-icon"> 
-        <link href="../static/images/favicon.ico" rel="apple-touch-icon">
-        <link href="../static/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-        <link href="../static/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
-        <link href="../static/css/custom.css" rel="stylesheet" type="text/css" />
+
+        <link rel="shortcut icon" href="{{=URL('static','images/favicon.ico')}}" type="image/x-icon">
+        <link rel="apple-touch-icon" href="{{=URL('static','images/favicon.png')}}">
+        
+        {{
+        response.files.append(URL('static','css/bootstrap.min.css'))
+        response.files.append(URL('static','css/bootstrap-responsive.min.css'))
+        response.files.append(URL('static','css/web2py_bootstrap.css'))
+        response.files.append(URL('static','css/custom.css'))
+        }}
+
         {{include 'web2py_ajax.html'}}
-        <noscript>
-            <link href="../static/css/web2py_bootstrap_nojs.css" rel="stylesheet" type="text/css" />
-        </noscript>
-        <script src="../static/js/modernizr.custom.js"></script>
+
+        <noscript><link href="{{=URL('static', 'css/web2py_bootstrap_nojs.css')}}" rel="stylesheet" type="text/css" /></noscript>
+        <script src="{{=URL('static','js/modernizr.custom.js')}}"></script>
         {{block head}}{{end}}
     </head>
 
@@ -42,13 +47,19 @@
                     <div class="nav-collapse collapse">
                         {{is_mobile=request.user_agent().is_mobile}}
                         {{if response.menu:}}
-                        {{=MENU(response.menu, _class='mobile-menu nav' if is_mobile else 'nav',mobile=is_mobile,li_class='dropdown',ul_class='dropdown-menu')}}
+                            {{=MENU(response.menu, _class='mobile-menu nav' if is_mobile else 'nav',mobile=is_mobile,li_class='dropdown',ul_class='dropdown-menu')}}
                         {{pass}}
-                        <form class="navbar-form pull-right">
-                            <input class="span2" type="text" placeholder="Email">
-                            <input class="span2" type="password" placeholder="Password">
+                        
+                        <form class="navbar-form pull-right" action="/bitbuddy/default/user/login">
+                            <input class="span2" name="email" type="text" placeholder="Email">
+                            <input class="span2" name="password" type="password" placeholder="Password">
                             <button type="submit" class="btn">Log In</button>
+                        </form>
+                        <form class="navbar-form pull-right" action="/bitbuddy/default/user/register">
                             <button type="submit" class="btn btn-success">Sign Up</button>
+                        </form>
+                        <form class="navbar-form pull-right" action="/bitbuddy/default/user/logout">
+                            <button type="submit" class="btn">Log Out</button>
                         </form>
                     </div>
                 </div>
