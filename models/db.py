@@ -4,7 +4,9 @@
 ## be redirected to HTTPS, uncomment the line below:
 # request.requires_https()
 
-db = DAL('mysql://bitbuddy:asdfasdf@localhost/bitbuddy', pool_size=1, check_reserved=['mysql'])
+from mysql_resources import mysqlUser, mysqlPassword, mysqlDatabase, mysqlPort, mysqlHost
+
+db = DAL('mysql://' + mysqlUser + ':' mysqlPassword + '@' + mysqlHost + '/' mysqlDatabase, pool_size=1, check_reserved=['mysql'])
 
 ## by default give a view/generic.extension to all actions from localhost
 ## none otherwise. a pattern can be 'controller/function.extension'
