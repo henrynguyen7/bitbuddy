@@ -4,9 +4,23 @@
 ## be redirected to HTTPS, uncomment the line below:
 # request.requires_https()
 
-from mysql_resources import mysqlUser, mysqlPassword, mysqlDatabase, mysqlPort, mysqlHost
+import json
+import os
 
-db = DAL('mysql://' + mysqlUser + ':' + mysqlPassword + '@' + mysqlHost + '/' + mysqlDatabase, pool_size=1, check_reserved=['mysql'])
+# load mysql login credentials
+filepath = os.path.join(request.folder, "private", "resources.json")
+resources = open(filepath, 'r')
+resourceData = json.load(resources)
+resources.close()
+
+# TODO: Put these into a dict or some other Python data struct for this kinda thing
+mysqlUsername = resourceData["mysql"]["username"]
+mysqlPassword = resourceData["mysql"]["password"]
+mysqlDatabase = resourceData["mysql"]["database"]
+mysqlHost = resourceData["mysql"]["host"]
+mysqlPort = resourceData["mysql"]["port"]
+
+db = DAL('mysql://' + mysqlUsername + ':' + mysqlPassword + '@' + mysqlHost + '/' + mysqlDatabase, pool_size=1, check_reserved=['mysql'])
 
 ## by default give a view/generic.extension to all actions from localhost
 ## none otherwise. a pattern can be 'controller/function.extension'
