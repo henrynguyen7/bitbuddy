@@ -12,11 +12,12 @@ import json
 import os
 from bitcoinrpc import AuthServiceProxy
 
-# load bitcoind client login credentials
-filepath = os.path.join(request.folder, "private", "resources.json")
-resources = open(filepath, 'r')
-resourceData = json.load(resources)
-resources.close()
+# load bitcoind client login credentials from resource file
+dir = os.path.dirname(__file__)
+resourceFile = os.path.join(dir, "../private", "resources.json")
+resource = open(resourceFile, 'r')
+resourceData = json.load(resource)
+resource.close()
 
 # TODO: Put these into a dict or some other Python data struct for this kinda thing
 bitcoindUsername = resourceData["bitcoind"]["username"]

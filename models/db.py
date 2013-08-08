@@ -7,11 +7,11 @@
 import json
 import os
 
-# load mysql login credentials
-filepath = os.path.join(request.folder, "private", "resources.json")
-resources = open(filepath, 'r')
-resourceData = json.load(resources)
-resources.close()
+# load mysql login credentials from resource file
+resourceFile = os.path.join(request.folder, "private", "resources.json")
+resource = open(resourceFile, 'r')
+resourceData = json.load(resource)
+resource.close()
 
 # TODO: Put these into a dict or some other Python data struct for this kinda thing
 mysqlUsername = resourceData["mysql"]["username"]
