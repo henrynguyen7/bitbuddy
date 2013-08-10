@@ -4,7 +4,23 @@
 ## be redirected to HTTPS, uncomment the line below:
 # request.requires_https()
 
-db = DAL('mysql://bitbuddy:asdfasdf@localhost/bitbuddy', pool_size=1, check_reserved=['mysql'])
+import json
+import os
+
+# load mysql login credentials from resource file
+resourceFile = os.path.join(request.folder, "private", "resources.json")
+resource = open(resourceFile, 'r')
+resourceData = json.load(resource)
+resource.close()
+
+# TODO: Put these into a dict or some other Python data struct for this kinda thing
+mysqlUsername = resourceData["mysql"]["username"]
+mysqlPassword = resourceData["mysql"]["password"]
+mysqlDatabase = resourceData["mysql"]["database"]
+mysqlHost = resourceData["mysql"]["host"]
+mysqlPort = resourceData["mysql"]["port"]
+
+db = DAL('mysql://' + mysqlUsername + ':' + mysqlPassword + '@' + mysqlHost + '/' + mysqlDatabase, pool_size=1, check_reserved=['mysql'])
 
 ## by default give a view/generic.extension to all actions from localhost
 ## none otherwise. a pattern can be 'controller/function.extension'

@@ -8,11 +8,23 @@ to a more secure client such as Armory.
 Author: Henry Nguyen
 """
 
-# TODO: Move bitcoind_resources.py into ../private and figure out how to import it into here
-# import sys
-# sys.path.append('../private/')
-from bitcoind_resources import bitcoindIP, bitcoindPort, bitcoindUser, bitcoindPass, bitcoindProtocol
+import json
+import os
 from bitcoinrpc import AuthServiceProxy
+
+# load bitcoind client login credentials from resource file
+dir = os.path.dirname(__file__)
+resourceFile = os.path.join(dir, "../private", "resources.json")
+resource = open(resourceFile, 'r')
+resourceData = json.load(resource)
+resource.close()
+
+# TODO: Put these into a dict or some other Python data struct for this kinda thing
+bitcoindUsername = resourceData["bitcoind"]["username"]
+bitcoindPassword = resourceData["bitcoind"]["password"]
+bitcoindProtocol = resourceData["bitcoind"]["protocol"]
+bitcoindIP = resourceData["bitcoind"]["ip"]
+bitcoindPort = resourceData["bitcoind"]["port"]
 
 class BitcoinClient:
     # TODO: Figure out how to implement this class as a Singleton
@@ -20,7 +32,7 @@ class BitcoinClient:
     
     def __init__(self):
         """Initializes the class with the bitcoind client."""
-        self.bitcoind = AuthServiceProxy(bitcoindProtocol + bitcoindUser + ":" + bitcoindPass + "@" + bitcoindIP + ":" + bitcoindPort)  
+        self.bitcoind = AuthServiceProxy(bitcoindProtocol + "://" + bitcoindUsername + ":" + bitcoindPassword + "@" + bitcoindIP + ":" + bitcoindPort)  
         
     # def addmultisigaddress(self, nrequired, ["key","key"], account=None):
     #     """Add a nrequired-to-sign multisignature address to the wallet.
