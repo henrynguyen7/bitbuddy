@@ -21,19 +21,19 @@ def index():
     response.flash = T("Welcome to web2py!")
     return dict(message=T('Hello World'))
 
-@request.restful()
-def user():
-    def GET(*args,**vars):
-        name = db(db.auth_user.id == request.vars.id).select(db.auth_user.name)
-        return dict(data=name)
-    def POST(*args,**vars):
-        rowId = db.auth_user.insert(name=request.vars.name)
-        return dict(success=rowId, name=request.vars.name)
-    def PUT(*args,**vars):
-        return dict()
-    def DELETE(*args,**vars):
-        return dict()
-    return locals()
+# @request.restful()
+# def user():
+#     def GET(*args,**vars):
+#         name = db(db.auth_user.id == request.vars.id).select(db.auth_user.name)
+#         return dict(data=name)
+#     def POST(*args,**vars):
+#         rowId = db.auth_user.insert(name=request.vars.name)
+#         return dict(success=rowId, name=request.vars.name)
+#     def PUT(*args,**vars):
+#         return dict()
+#     def DELETE(*args,**vars):
+#         return dict()
+#     return locals()
 
 def user():
     """
@@ -49,6 +49,18 @@ def user():
         @auth.requires_permission('read','table name',record_id)
     to decorate functions that need access control
     """
+    # def login():
+    #     return redirect(URL('main'))
+
+    # def register():
+    #     form = auth()
+    #     if form.process().accepted:
+    #         redirect(URL('main'))
+    #     elif form.errors:
+    #         response.flash = 'Form has errors'
+    #     else:
+    #         response.flash = 'Please fill the form'
+    #     return dict(form=form)
     form = auth()
     if form.process().accepted:
         redirect(URL('main'))
@@ -57,6 +69,8 @@ def user():
     else:
         response.flash = 'Please fill the form'
     return dict(form=form)
+
+
 
 def main():
     return dict(data=None)

@@ -49,10 +49,9 @@
                         {{if response.menu:}}
                             {{=MENU(response.menu, _class='mobile-menu nav' if is_mobile else 'nav',mobile=is_mobile,li_class='dropdown',ul_class='dropdown-menu')}}
                         {{pass}}
-                        
-                        <form class="navbar-form pull-right" action="/bitbuddy/default/user/login">
-                            <input class="span2" name="email" type="text" placeholder="Email">
-                            <input class="span2" name="password" type="password" placeholder="Password">
+                        <form class="navbar-form pull-right" method="post" action="/bitbuddy/default/user/login">
+                            <input class="span2" id="auth_user_email" name="email" type="text" placeholder="Email">
+                            <input class="span2" id="auth_user_password" name="password" type="password" placeholder="Password">
                             <button type="submit" class="btn">Log In</button>
                         </form>
                         <form class="navbar-form pull-right" action="/bitbuddy/default/user/register">
