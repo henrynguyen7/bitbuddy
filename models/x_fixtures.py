@@ -1,7 +1,13 @@
 """
-BitBuddy Fixtures (seed data)
+BitBuddy Fixtures (seed data).
+
+Defines all required seed data to be populated into database on first run.
+Includes test user accounts, global variables, business logic requirements,
+administrative settings, and ID/description pairs for lookup tables.
 
 More info: http://thadeusb.com/weblog/2010/4/21/using_fixtures_in_web2py
+
+Author: Henry Nguyen (henry@bitbuddy.biz)
 """
 
 # Set RESET = TRUE to reset ALL database data
@@ -45,16 +51,19 @@ if db(db.globalSettings.id > 0).count() == 0:
         minTransactionConfirmations=01,
         maxBatchWaitTimeMilliseconds=60)
 
+## TODO: Insert correct values
 if db(db.orderType.id > 0).count() == 0:
     db.orderType.insert(
         id=01,
         description='test1')
 
+## TODO: Insert correct values
 if db(db.requestType.id > 0).count() == 0:
     db.requestType.insert(
         id=01,
         description='test1')
 
+## TODO: Insert correct values
 if db(db.transactionStatus.id > 0).count() == 0:
     db.transactionStatus.insert(
         id=01,

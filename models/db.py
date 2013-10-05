@@ -1,3 +1,15 @@
+"""
+Model file for database setup and configuration.
+
+Loads required resources for connecting to MySQL database
+and defines basic structure and relationship of auth tables.
+Also sets up SMTP mail settings.
+
+## TODO: Move SMTP settings out to a separate config file.
+
+Author: Henry Nguyen (henry@bitbuddy.biz)
+"""
+
 # -*- coding: utf-8 -*-
 
 ## if SSL/HTTPS is properly configured and you want all HTTP requests to
@@ -65,8 +77,9 @@ auth.add_group('buyer', 'buyer')
 
 ## configure email
 mail = auth.settings.mailer
+## TODO: Modify for BitBuddy SMTP
 mail.settings.server = 'logging' or 'smtp.gmail.com:587'
-mail.settings.sender = 'you@gmail.com'
+mail.settings.sender = 'admin@bitbuddy.biz'
 mail.settings.login = 'username:password'
 
 ## configure auth policy

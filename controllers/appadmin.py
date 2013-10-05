@@ -1,3 +1,14 @@
+"""
+Controller for /appadmin service. 
+
+Provided built-in by web2py
+framework. Handles functionality for managing the app through
+the web2py-provided UI, including user management and database
+administration. 
+
+Unmodified from original.
+"""
+
 # -*- coding: utf-8 -*-
 
 # ##########################################################

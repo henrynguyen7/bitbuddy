@@ -3,10 +3,13 @@
 # DEPENDENCIES:
 - bitcoind: https://github.com/bitcoin/bitcoin
 - bitcoinrpc: https://github.com/jgarzik/python-bitcoinrpc
+- mysql: http://dev.mysql.com/downloads/mysql/
 
 # INSTALLATION:
 - 1) Install web2py: http://www.web2py.com/init/default/download. It is recommended to install from source as the Mac OS X client has errors on startup.
 - 2) Clone this project into the web2py/applications/ folder. The name given to the folder will be the name of the web2py project, meaning all request URLs will include that name. It is therefore recommended to keep this name simple, e.g. "bitbuddy".
+- 3) Setup MySQL server.
+- 4) Modify MySQL connection settings in private/resources.json.
 
 # CODE NOTES:
 - In Python, every function call to an object function passes a copy of "self" as the first argument. From Python docs: "Often, the first argument of a method is called self. This is nothing more than a convention: the name self has absolutely no special meaning to Python. Note, however, that by not following the convention your code may be less readable to other Python programmers, and it is also conceivable that a class browser program might be written that relies upon such a convention."

@@ -1,8 +1,16 @@
+"""
+Model file for menus used throughout UI.
+
+Template provided by web2py framework. Defines menu panels, buttons, and
+meta data for HTTP responses.
+
+Author: Henry Nguyen (henry@bitbuddy.biz)
+"""
+
 # -*- coding: utf-8 -*-
-# this file is released under public domain and you can use without limitations
 
 #########################################################################
-## Customize your APP title, subtitle and menus here
+## Application title, subtitle, and metatags
 #########################################################################
 
 response.logo = A(B('BitBuddy'), _class="brand",_href="http://bitbuddy.biz/")
@@ -10,16 +18,16 @@ response.title = request.application.replace('_',' ').title()
 response.subtitle = T('')
 
 ## read more at http://dev.w3.org/html5/markup/meta.name.html
-response.meta.author = 'Peter Lecki & Henry Nguyen <admin@bitbuddy.com>'
-response.meta.description = 'Buy and sell with Bitcoins'
+response.meta.author = 'Peter Lecki & Henry Nguyen <admin@bitbuddy.biz>'
+response.meta.description = 'Bitcoin Merchant Tools'
 response.meta.keywords = 'bitcoin, bitbuddy, merchant'
 response.meta.generator = 'Web2py Web Framework'
 
-## your http://google.com/analytics id
+## TODO: Insert Google Analytics ID here, per http://google.com/analytics
 response.google_analytics_id = None
 
 #########################################################################
-## this is the main application menu add/remove items as required
+## Application menu
 #########################################################################
 
 response.menu = [
@@ -39,7 +47,7 @@ response.footerMenu = [
 DEVELOPMENT_MENU = False
 
 #########################################################################
-## provide shortcuts for development. remove in production
+## Shortcuts for development. REMOVE IN PRODUCTION
 #########################################################################
 
 def _():

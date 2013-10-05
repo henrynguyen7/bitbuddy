@@ -1,9 +1,12 @@
 """
 Bitcoin Client
 
-Provides a wrapper class for the bitcoind client. Initially
-will use bitcoind as the client but should later be upgraded
-to a more secure client such as Armory.
+Provides a wrapper class for the bitcoind client, to allow for easy modularity
+so that a different bitcoin daemon can be used at a later time, as needed. 
+
+Initially will use bitcoind as the client but will later be upgraded
+to Armory which is much more secure due to separate, offline storage of 
+private keys and other sensitive data.
 
 Author: Henry Nguyen
 """
