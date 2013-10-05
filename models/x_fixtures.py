@@ -10,7 +10,7 @@ More info: http://thadeusb.com/weblog/2010/4/21/using_fixtures_in_web2py
 Author: Henry Nguyen (henry@bitbuddy.biz)
 """
 
-# Set RESET = TRUE to reset ALL database data
+# Set "RESET = True" to reset ALL database data
 # Useful for dev/testing... don't let this anywhere near production
 RESET = False
 
@@ -24,7 +24,7 @@ if db(db.auth_user.id > 0).count() == 0:
         first_name='Testers',
         last_name='Inc',
         email='test@bitbuddy.com',
-        password='<include a pre-encrypted password here>')
+        password='pbkdf2(1000,20,sha512)$95c1fa7bb0ac650e$583a459eb221a6b9c932d02e0213f0cfa69c1d89')
 
 if db(db.exchange.id > 0).count() == 0:
     db.exchange.insert(

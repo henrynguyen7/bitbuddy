@@ -5,6 +5,8 @@ Loads required resources for connecting to MySQL database
 and defines basic structure and relationship of auth tables.
 Also sets up SMTP mail settings.
 
+Note: All files in models folder are loaded alphabetically, so order matters.
+
 ## TODO: Move SMTP settings out to a separate config file.
 
 Author: Henry Nguyen (henry@bitbuddy.biz)
@@ -54,17 +56,21 @@ auth.settings.extra_fields['auth_user'] = [
     Field('company'),
     Field('website'),
     Field('lastLoginDate'),
-    Field('createDate','datetime', default=request.now)]
+    Field('createDate', 'datetime', default=request.now)]
 
 ## create all tables needed by auth if not custom tables
+# username=false specifies that username is not required and will instead use email for login
 auth.define_tables(username=False, signature=False)
 
-## define groups
-## example: auth.add_group('admin', 'admin')
-auth.add_group('admin', 'admin')
-auth.add_group('user', 'user')
-auth.add_group('merchant', 'merchant')
-auth.add_group('buyer', 'buyer')
+## add groups only if they don't already exist
+def add_group_if_not_exists(group, description):
+    if not db(db.auth_group.role==group).count():
+        auth.add_group(group, description)
+
+add_group_if_not_exists('admin', 'admin')
+add_group_if_not_exists('user', 'user')
+add_group_if_not_exists('merchant', 'merchant')
+add_group_if_not_exists('buyer', 'buyer')
 
 ## define permissions for groups
 ## example: auth.add_permission(group_id, 'name', 'object', record_id)
