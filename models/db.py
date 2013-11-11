@@ -21,6 +21,20 @@ Author: Henry Nguyen (henry@bitbuddy.biz)
 import json
 import os
 
+# Necessary to allow CORS
+if request.env.http_origin:
+    response.headers['Access-Control-Allow-Origin'] = request.env.http_origin
+    response.headers['Access-Control-Allow-Origin'] = "*"
+    response.headers['Access-Control-Allow-Credentials'] = 'true'
+    response.headers['Access-Control-Max-Age'] = 86400
+
+    if request.env.request_method == 'OPTIONS':
+        if request.env.http_access_control_request_method:
+            print request.env.http_access_control_request_method
+            response.headers['Access-Control-Allow-Methods'] = request.env.http_access_control_request_method
+            if request.env.http_access_control_request_headers:
+                response.headers['Access-Control-Allow-Headers'] = request.env.http_access_control_request_headers
+
 # load mysql login credentials from resource file
 resourceFile = os.path.join(request.folder, "private", "resources.json")
 resource = open(resourceFile, 'r')

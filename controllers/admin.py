@@ -18,4 +18,4 @@ from bitcoin_client import BitcoinClient
 def getBlockcount():
     client = BitcoinClient()
     blockcount = client.getblockcount()
-    return dict(message=T(str(blockcount)))
+    return dict(blockcount=str(blockcount))
