@@ -26,6 +26,16 @@ if db(db.auth_user.id > 0).count() == 0:
         email='test@bitbuddy.com',
         password='pbkdf2(1000,20,sha512)$95c1fa7bb0ac650e$583a459eb221a6b9c932d02e0213f0cfa69c1d89')
 
+if db(db.merchantProduct.id > 0).count() == 0:
+    db.merchantProduct.insert(
+        auth_user_id=1,
+        merchantNumber=1,
+        name='TestProductName1',
+        description='TestProductDescription1',
+        priceUSD=5,
+        priceBTC=5,
+        shippingCost=5)
+
 if db(db.exchange.id > 0).count() == 0:
     db.exchange.insert(
         name='Test',

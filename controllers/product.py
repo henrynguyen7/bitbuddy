@@ -14,10 +14,9 @@ track_changes(True)
 @request.restful()
 def product():
     response.view = 'generic.json'
-    response.headers['Access-Control-Allow-Origin'] = "*"
     def GET(tablename,id):
         if not tablename=='merchantProduct': raise HTTP(400)
-        return dict(person = db.merchantProduct(id))
+        return dict(products = db.merchantProduct(id))
     def POST(tablename,**fields):
         if not tablename=='merchantProduct': raise HTTP(400)
         return db.person.validate_and_insert(**fields)
@@ -26,3 +25,6 @@ def product():
     def DELETE(*args,**vars):
         return dict()
     return locals()
+
+def getProducts():
+    return dict(products= db().select(db.merchantProduct.ALL, orderby=id))
