@@ -19,3 +19,13 @@ def getBlockcount():
     client = BitcoinClient()
     blockcount = client.getblockcount()
     return dict(blockcount=str(blockcount))
+
+def getDifficulty():
+    client = BitcoinClient()
+    difficulty = client.getdifficulty()
+    return dict(difficulty=str(difficulty))
+
+def getConnectionCount():
+    client = BitcoinClient()
+    connectionCount = client.getconnectioncount()
+    return dict(connectionCount=str(connectionCount))
