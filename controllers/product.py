@@ -7,24 +7,49 @@ reading, updates, and deletion.
 Author: Henry Nguyen (henry@bitbuddy.biz)
 """
 
-# Runs all modules with the latest changes instead of cached version, useful for dev
 from gluon.custom_import import track_changes
+from gluon.tools import Crud
+
+# Runs all modules with the latest changes instead of cached version, useful for dev
 track_changes(True)
 
+crud = Crud(db)
+
 @request.restful()
-def product():
+def api():
     response.view = 'generic.json'
-    def GET(tablename,id):
-        if not tablename=='merchantProduct': raise HTTP(400)
-        return dict(products = db.merchantProduct(id))
-    def POST(tablename,**fields):
-        if not tablename=='merchantProduct': raise HTTP(400)
-        return db.person.validate_and_insert(**fields)
-    def PUT(*args,**vars):
-        return dict()
-    def DELETE(*args,**vars):
-        return dict()
+    def GET(id):
+        return dict(person = db.merchantProduct(id))
+    def POST(**fields):
+        return db.merchantProduct.validate_and_insert(**fields)
     return locals()
 
-def getProducts():
-    return dict(products= db().select(db.merchantProduct.ALL, orderby=id))
+def product():
+    form = SQLFORM(db.merchantProduct, 
+        fields=['name', 'merchantNumber', 'description', 'priceUSD', 'shippingCost'],
+        labels={
+            'name': 'Product Name',
+            'merchantNumber': 'Merchant ID Number',
+            'description': 'Description',
+            'priceUSD': 'Price in USD',
+            'shippingCost': 'Shipping Cost'
+        },
+        deletable=True)
+    if form.process().accepted:
+        response.flash = 'form accepted'
+    elif form.errors:
+        response.flash = 'form has errors'
+    else:
+        response.flash = 'please fill out the form'
+    # records = db.merchantProduct()
+    records = SQLFORM.grid(db.merchantProduct, 
+        fields=['name', 'merchantNumber', 'description', 'priceUSD', 'shippingCost'],
+        headers={
+            'name': 'Product Name',
+            'merchantNumber': 'Merchant ID Number',
+            'description': 'Description',
+            'priceUSD': 'Price in USD',
+            'shippingCost': 'Shipping Cost'
+        })
+    return dict(form=form, records=records)
+    # return dict(form=crud.update(db.merchantProduct), records=records)
