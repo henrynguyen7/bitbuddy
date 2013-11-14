@@ -11,9 +11,9 @@ Author: Henry Nguyen (henry@bitbuddy.biz)
 
 # Runs all modules with the latest changes instead of cached version, useful for dev
 from gluon.custom_import import track_changes
-track_changes(True)
-
 from bitcoin_client import BitcoinClient
+
+track_changes(True)
 
 def getBlockcount():
     client = BitcoinClient()

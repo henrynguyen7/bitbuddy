@@ -238,7 +238,7 @@ db.define_table('globalSettings',
                 # migrate='globalSettings.table')
 
 db.define_table('merchantProduct',
-                Field('auth_user_id', 'reference auth_user', notnull=True),
+                Field('auth_user_id', 'reference auth_user', notnull=True, writable=False, readable=False),
                 Field('merchantNumber', 'string'),
                 Field('name', 'string'),
                 Field('description', 'string'),

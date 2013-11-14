@@ -15,6 +15,8 @@ Author: Henry Nguyen (henry@bitbuddy.biz)
 
 # -*- coding: utf-8 -*-
 
+from bitcoin_client import BitcoinClient
+
 def index():
     """
     example action using the internationalization operator T and flash
@@ -77,7 +79,11 @@ def user():
 
 
 def main():
-    return dict(data=None)
+    client = BitcoinClient()
+    blockcount = client.getblockcount()
+    difficulty = client.getdifficulty()
+    connectionCount = client.getconnectioncount()
+    return dict(blockcount=blockcount, difficulty=difficulty, connectionCount=connectionCount)
 
 @cache.action()
 def download():

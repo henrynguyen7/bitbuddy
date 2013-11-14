@@ -38,6 +38,14 @@ response.menu = [
     (T('Contact'), False, URL('default', 'index'), [])
 ]
 
+response.admin_menu = [
+    (T('Home'), False, URL('default', 'main'), []),
+    (T('Wallet'), False, URL('wallet', 'wallet'), []),
+    (T('Sales'), False, URL('sales', 'sales'), []),
+    (T('Products'), False, URL('products', 'products'), []),
+    (T('Settings'), False, URL('settings', 'settings'), [])
+]
+
 response.footerMenu = [
     (T('BitBuddy'), False, URL('default', 'index'), []),
     (T('Privacy'), False, URL('default', 'index'), []),
