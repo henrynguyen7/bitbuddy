@@ -12,36 +12,42 @@ track_changes(True)
 crud = Crud(db)
 
 def sales():
-    # TODO: Set these attributes directly on db table definitions... remove from here when schema.py is completed
-    db.merchantProduct.id.writable = False
-    db.merchantProduct.id.readable = False
-    db.merchantProduct.auth_user_id.writable = False
-    db.merchantProduct.auth_user_id.readable = False
-    db.merchantProduct.priceBTC.writable = False
-    db.merchantProduct.priceBTC.readable = False
-    db.merchantProduct.createDate.writable = False
-    db.merchantProduct.createDate.readable = False
     grid = SQLFORM.grid(
         query=db.merchantProduct.auth_user_id==request.vars.auth_user_id,
         fields=[
             db.merchantProduct.name,
-            db.merchantProduct.merchantNumber,
             db.merchantProduct.description,
-            db.merchantProduct.priceUSD,
-            db.merchantProduct.shippingCost],
-        deletable=True,
-        editable=True,
+            db.merchantProduct.priceUSD],
+        deletable=False,
+        editable=False,
         details=False,
         selectable=None,
         searchable=False,
-        links=None,
-        links_in_grid=False,
-        user_signature=False,
+        links=[lambda row: A(T('Purchase'),_href=URL("sales","purchaseProduct",args=[row.id]))],
+        links_in_grid=True,
+        user_signature=True,
         csv=False,
         headers={
             'merchantProduct.name': 'Product Name',
-            'merchantProduct.merchantNumber': 'Merchant ID Number',
             'merchantProduct.description': 'Description',
-            'merchantProduct.priceUSD': 'Price (USD)',
-            'merchantProduct.shippingCost': 'Shipping Cost'})
+            'merchantProduct.priceUSD': 'Price (USD)'})
+    grid.element('.web2py_counter', replace=None)
     return dict(grid=grid)
+
+def purchaseProduct():
+    """
+    TODO: should perform the following functions:
+    1. Generate new bitcoin address
+    2. Query exchange for latest exchange rate
+    3. Calculate priceBTC of Product
+    4. Display popup page with:
+        - 10 minute timer
+        - product info
+        - priceBTC
+        - bitcoin address to send to
+
+    In separate function, OnBitcoinsReceivedInAddress(address)
+    1. Perform calculations to determine whether payment is valid.
+    2. etc...
+    """
+    return dict(message="TODO")

@@ -57,4 +57,5 @@ def products():
             'merchantProduct.description': 'Description',
             'merchantProduct.priceUSD': 'Price (USD)',
             'merchantProduct.shippingCost': 'Shipping Cost'})
+    grid.element('.web2py_counter', replace=None)
     return dict(grid=grid)
