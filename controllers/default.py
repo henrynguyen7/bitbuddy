@@ -16,6 +16,7 @@ Author: Henry Nguyen (henry@bitbuddy.biz)
 # -*- coding: utf-8 -*-
 
 from bitcoin_client import BitcoinClient
+from bitcoin_exchange import BitcoinExchange
 
 def index():
     """
@@ -32,10 +33,11 @@ def user():
 
 def main():
     client = BitcoinClient()
+    exchange = BitcoinExchange()
     blockcount = client.getblockcount()
     difficulty = client.getdifficulty()
-    connectionCount = client.getconnectioncount()
-    return dict(blockcount=blockcount, difficulty=difficulty, connectionCount=connectionCount)
+    lastPrice = exchange.getlastprice()
+    return dict(blockcount=blockcount, difficulty=difficulty, lastPrice=lastPrice)
 
 @cache.action()
 def download():
