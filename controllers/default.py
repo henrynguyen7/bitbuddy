@@ -27,59 +27,8 @@ def index():
     """
     return dict(message=None)
 
-# @request.restful()
-# def user():
-#     def GET(*args,**vars):
-#         name = db(db.auth_user.id == request.vars.id).select(db.auth_user.name)
-#         return dict(data=name)
-#     def POST(*args,**vars):
-#         rowId = db.auth_user.insert(name=request.vars.name)
-#         return dict(success=rowId, name=request.vars.name)
-#     def PUT(*args,**vars):
-#         return dict()
-#     def DELETE(*args,**vars):
-#         return dict()
-#     return locals()
-
 def user():
     return dict(form=auth())
-
-def userBAD():
-    """
-    exposes:
-    http://..../[app]/default/user/login
-    http://..../[app]/default/user/logout
-    http://..../[app]/default/user/register
-    http://..../[app]/default/user/profile
-    http://..../[app]/default/user/retrieve_password
-    http://..../[app]/default/user/change_password
-    use @auth.requires_login()
-        @auth.requires_membership('group name')
-        @auth.requires_permission('read','table name',record_id)
-    to decorate functions that need access control
-    """
-    # def login():
-    #     return redirect(URL('main'))
-
-    # def register():
-    #     form = auth()
-    #     if form.process().accepted:
-    #         redirect(URL('main'))
-    #     elif form.errors:
-    #         response.flash = 'Form has errors'
-    #     else:
-    #         response.flash = 'Please fill the form'
-    #     return dict(form=form)
-    form = auth()
-    if form.process().accepted:
-        redirect(URL('main'))
-    elif form.errors:
-        response.flash = 'Form has errors'
-    else:
-        response.flash = 'Please fill the form'
-    return dict(form=form)
-
-
 
 def main():
     client = BitcoinClient()
