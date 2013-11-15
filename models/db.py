@@ -21,6 +21,10 @@ Author: Henry Nguyen (henry@bitbuddy.biz)
 import json
 import os
 
+# Runs all modules with the latest changes instead of cached version, useful for dev
+from gluon.custom_import import track_changes
+track_changes(True)
+
 # Necessary to allow CORS
 if request.env.http_origin:
     response.headers['Access-Control-Allow-Origin'] = request.env.http_origin
