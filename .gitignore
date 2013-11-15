@@ -6,7 +6,6 @@ errors/
 private/
 sessions/
 uploads/
-__init__.py*
 
 # Compiled source #
 ###################
