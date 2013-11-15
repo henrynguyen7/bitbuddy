@@ -42,6 +42,9 @@ def index():
 #     return locals()
 
 def user():
+    return dict(form=auth())
+
+def userBAD():
     """
     exposes:
     http://..../[app]/default/user/login
