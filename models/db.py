@@ -42,7 +42,9 @@ mysqlDatabase = resourceData["mysql"]["database"]
 mysqlHost = resourceData["mysql"]["host"]
 mysqlPort = resourceData["mysql"]["port"]
 
-db = DAL('mysql://' + mysqlUsername + ':' + mysqlPassword + '@' + mysqlHost + '/' + mysqlDatabase, pool_size=1, check_reserved=['mysql'])
+db = DAL('mysql://' + mysqlUsername + ':' + mysqlPassword + '@' + mysqlHost + '/' + mysqlDatabase, pool_size=3, check_reserved=['mysql'], migrate=False)
+# The "migrate=False" parameter prevents automatic modification of schema if it differs from its definition here. Schema mods should be done deliberately and manually.
+# Resulting connection string can be shown using: print db._uri
 
 ## by default give a view/generic.extension to all actions from localhost
 ## none otherwise. a pattern can be 'controller/function.extension'
