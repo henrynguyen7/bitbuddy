@@ -1,10 +1,42 @@
 {{extend 'layout_dashboard.html'}}
 
+<body onload="startTime()">
+
+<div id="timer"></div>
 <ul>
     <li>address: {{=address}}</li>
     <li>exchangeRate: {{=exchangeRate}}</li>
+    <li>productName: {{=productName}}</li>
+    <li>productDescription: {{=productDescription}}</li>
     <li>productPriceUSD: {{=productPriceUSD}}</li>
+    <li>productShippingCost: {{=productShippingCost}}</li>
     <li>productPriceBTC: {{=productPriceBTC}}</li>
 </ul>
+
+<script>
+    function startTime() {
+        var today = new Date();
+        var h = today.getHours();
+        var m = today.getMinutes();
+        var s = today.getSeconds();
+
+        // add a zero in front of numbers < 10
+        m = checkTime(m);
+        s = checkTime(s);
+        document.getElementById('timer').innerHTML = h + ":" + m + ":" + s;
+        t = setTimeout(function(){
+            startTime()
+        }, 500);
+    }
+
+    function checkTime(i) {
+        if (i < 10) {
+            i = "0" + i;
+        }
+        
+        return i;
+    }
+
+</script>
 
 {{end}}
