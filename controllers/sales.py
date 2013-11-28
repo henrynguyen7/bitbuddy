@@ -23,7 +23,7 @@ def sales():
         details=False,
         selectable=None,
         searchable=False,
-        links=[lambda row: A(T('Purchase'),_href=URL("sales","purchaseProduct",args=[row.id]))],
+        links=[lambda row: A(T('Purchase'),_href=URL("sales","purchaseProduct",vars={'productId': row.id}))],
         links_in_grid=True,
         user_signature=True,
         csv=False,
@@ -38,6 +38,7 @@ def purchaseProduct():
     """
     TODO: should perform the following functions:
     1. Generate new bitcoin address
+    1a. Add bitcoin address and account to userBtcAddress and userBtcAccount tables
     2. Query exchange for latest exchange rate
     3. Calculate priceBTC of Product
     4. Display popup page with:
@@ -50,4 +51,14 @@ def purchaseProduct():
     1. Perform calculations to determine whether payment is valid.
     2. etc...
     """
-    return dict(message="TODO")
+    from bitcoin_client import BitcoinClient
+    from bitcoin_exchange import BitcoinExchange
+    client = BitcoinClient()
+    exchange = BitcoinExchange()
+    # TODO: Create a brand new address so we can track the buyer instead of using the general-purpose "getaccountaddress"
+    address = client.getaccountaddress(account=str(auth.user.id))
+    exchangeRate = exchange.getlastprice()
+    product = db(db.merchantProduct.id==request.vars.productId).select()[0]
+    productPriceUSD = product.priceUSD
+    productPriceBTC = productPriceUSD / float(exchangeRate)
+    return dict(address=address, exchangeRate=exchangeRate, productPriceUSD=productPriceUSD, productPriceBTC=productPriceBTC)
