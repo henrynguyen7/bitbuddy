@@ -1,8 +1,7 @@
 {{extend 'layout_dashboard.html'}}
 
-<body onload="startTime()">
-
 <span id="timer"></span>
+
 <ul>
     <li>address: {{=address}}</li>
     <li>exchangeRate: {{=exchangeRate}}</li>
@@ -13,11 +12,15 @@
     <li>productPriceBTC: {{=productPriceBTC}}</li>
 </ul>
 
+<input id="refreshButton" type="button" value="Refresh" onClick="window.location.reload()">
+
 <script>
-    var minutes = 1;
-    var seconds = 0;
-    var secondsPerMinute = 60;
-    var count = (minutes * secondsPerMinute) + seconds;
+    document.getElementById("refreshButton").style.display = "none";
+
+    var minutes = 0;
+    var seconds = 10;
+    var SECONDS_PER_MINUTE = 60;
+    var count = (minutes * SECONDS_PER_MINUTE) + seconds;
 
     var counter = setInterval(timer, 1000); //1000 will run it every 1 second
 
@@ -25,11 +28,12 @@
         count = count - 1;
         if (count <= 0) {
             clearInterval(counter);
+            document.getElementById("timer").innerHTML = "This exchange rate has expired and payments will no longer be accepted at this address. Please refresh to obtain a new rate and address.";
+            document.getElementById("refreshButton").style.display = "block";
             return;
         }
-        document.getElementById("timer").innerHTML = count + " secs";
+        document.getElementById("timer").innerHTML = count + " seconds remaining";
     }
-
 </script>
 
 {{end}}
