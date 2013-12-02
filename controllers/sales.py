@@ -25,7 +25,7 @@ def sales():
         searchable=False,
         # Take user to createBuyer page first instead of directly to purchaseProduct page. TODO: allow login if already existing.
         # links=[lambda row: A(T('Purchase'),_href=URL("sales","purchaseProduct",vars={'productId': row.id}))],
-        links=[lambda row: A(T('Purchase'),_href=URL("sales","createBuyerAccount",vars={'productId': row.id}))],
+        links=[lambda row: A(T('Purchase'),_href=URL("sales","createBuyerAccount",vars=dict(productId=row.id)))],
         links_in_grid=True,
         user_signature=True,
         csv=False,
@@ -66,9 +66,8 @@ def purchaseProduct():
     from bitcoin_exchange import BitcoinExchange
     client = BitcoinClient()
     exchange = BitcoinExchange()
-    buyerId = request.vars.buyerId
     # TODO: Don't just blindly query for email here... should only display logged-in buyer account info
-    buyerEmail = db(db.buyer.id==buyerId).select()[0].email
+    buyerEmail = db(db.buyer.id==request.vars.buyerId).select()[0].email
     # TODO: Create a brand new address so we can track the buyer instead of using the general-purpose "getaccountaddress"
     address = client.getaccountaddress(account=str(auth.user.id))
     # TODO: Move account creation into auth_user creation code when available and refactor this to query for accountId
@@ -84,9 +83,6 @@ def purchaseProduct():
         address=address)
     exchangeRate = exchange.getlastprice()
     product = db(db.merchantProduct.id==request.vars.productId).select()[0]
-    productPriceUSD = product.priceUSD
-    productShippingCost = product.shippingCost
-    productPriceBTC = (productPriceUSD + productShippingCost) / float(exchangeRate)
     # btcTransactionId = db.btcTransaction.insert(
     #     btcTransactionType_id="""TODO""",
     #     transactionStatus_id="""TODO""",
@@ -115,6 +111,6 @@ def purchaseProduct():
         exchangeRate=exchangeRate, 
         productName=product.name,
         productDescription=product.description,
-        productPriceUSD=productPriceUSD, 
+        productPriceUSD=product.priceUSD, 
         productShippingCost=product.shippingCost,
-        productPriceBTC=productPriceBTC)
+        productPriceBTC=(product.priceUSD + product.shippingCost) / float(exchangeRate))
