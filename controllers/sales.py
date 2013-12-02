@@ -23,7 +23,9 @@ def sales():
         details=False,
         selectable=None,
         searchable=False,
-        links=[lambda row: A(T('Purchase'),_href=URL("sales","purchaseProduct",vars={'productId': row.id}))],
+        # Take user to createBuyer page first instead of directly to purchaseProduct page. TODO: allow login if already existing.
+        # links=[lambda row: A(T('Purchase'),_href=URL("sales","purchaseProduct",vars={'productId': row.id}))],
+        links=[lambda row: A(T('Purchase'),_href=URL("sales","createBuyerAccount",vars={'productId': row.id}))],
         links_in_grid=True,
         user_signature=True,
         csv=False,
@@ -33,6 +35,14 @@ def sales():
             'merchantProduct.priceUSD': 'Price (USD)'})
     grid.element('.web2py_counter', replace=None)
     return dict(grid=grid)
+
+def createBuyerAccount():
+    form = SQLFORM(db.buyer)
+    if form.process().accepted:
+        redirect(URL('purchaseProduct', vars=dict(buyerId=form.vars.id, productId=request.vars.productId)))
+    elif form.errors:
+        response.flash = 'form has errors'
+    return dict(form=form)
 
 def purchaseProduct():
     """
@@ -55,6 +65,8 @@ def purchaseProduct():
     from bitcoin_exchange import BitcoinExchange
     client = BitcoinClient()
     exchange = BitcoinExchange()
+    buyerId = request.vars.buyerId
+    buyerEmail = db(db.buyer.id==buyerId).select()[0].email
     # TODO: Create a brand new address so we can track the buyer instead of using the general-purpose "getaccountaddress"
     address = client.getaccountaddress(account=str(auth.user.id))
     # TODO: Move account creation into auth_user creation code when available and refactor this to query for accountId
@@ -94,6 +106,7 @@ def purchaseProduct():
     #     amountReceived="""TODO""",
     #     isRefunded="""TODO""")
     return dict(
+        buyerEmail=buyerEmail,
         address=address, 
         accountId=accountId, 
         addressId=addressId, 
