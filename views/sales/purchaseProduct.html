@@ -2,7 +2,7 @@
 
 <body onload="startTime()">
 
-<div id="timer"></div>
+<span id="timer"></span>
 <ul>
     <li>address: {{=address}}</li>
     <li>exchangeRate: {{=exchangeRate}}</li>
@@ -14,27 +14,20 @@
 </ul>
 
 <script>
-    function startTime() {
-        var today = new Date();
-        var h = today.getHours();
-        var m = today.getMinutes();
-        var s = today.getSeconds();
+    var minutes = 1;
+    var seconds = 0;
+    var secondsPerMinute = 60;
+    var count = (minutes * secondsPerMinute) + seconds;
 
-        // add a zero in front of numbers < 10
-        m = checkTime(m);
-        s = checkTime(s);
-        document.getElementById('timer').innerHTML = h + ":" + m + ":" + s;
-        t = setTimeout(function(){
-            startTime()
-        }, 500);
-    }
+    var counter = setInterval(timer, 1000); //1000 will run it every 1 second
 
-    function checkTime(i) {
-        if (i < 10) {
-            i = "0" + i;
+    function timer() {
+        count = count - 1;
+        if (count <= 0) {
+            clearInterval(counter);
+            return;
         }
-        
-        return i;
+        document.getElementById("timer").innerHTML = count + " secs";
     }
 
 </script>
