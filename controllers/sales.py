@@ -37,6 +37,7 @@ def sales():
     return dict(grid=grid)
 
 def createBuyerAccount():
+    # TODO: modify to create a new auth_user of type "buyer" instead of inputting an entry directly into the buyer table.
     form = SQLFORM(db.buyer)
     if form.process().accepted:
         redirect(URL('purchaseProduct', vars=dict(buyerId=form.vars.id, productId=request.vars.productId)))
@@ -66,6 +67,7 @@ def purchaseProduct():
     client = BitcoinClient()
     exchange = BitcoinExchange()
     buyerId = request.vars.buyerId
+    # TODO: Don't just blindly query for email here... should only display logged-in buyer account info
     buyerEmail = db(db.buyer.id==buyerId).select()[0].email
     # TODO: Create a brand new address so we can track the buyer instead of using the general-purpose "getaccountaddress"
     address = client.getaccountaddress(account=str(auth.user.id))
