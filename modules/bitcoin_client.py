@@ -29,7 +29,7 @@ bitcoindProtocol = resourceData["bitcoind"]["protocol"]
 bitcoindIP = resourceData["bitcoind"]["ip"]
 bitcoindPort = resourceData["bitcoind"]["port"]
 
-class BitcoinClient:
+class BitcoinClient(object):
     # TODO: Figure out how to implement this class as a Singleton
     # TODO: Add/fix parameters where needed per https://en.bitcoin.it/wiki/Original_Bitcoin_client/API_Calls_list
     

@@ -14,7 +14,7 @@ import json
 import urllib2
 # from campbx import CampBX
 
-class BitcoinExchange:
+class BitcoinExchange(object):
     # TODO: Figure out how to implement this class as a Singleton
     
     def __init__(self):
