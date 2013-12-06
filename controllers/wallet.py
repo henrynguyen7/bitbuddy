@@ -13,22 +13,22 @@ crud = Crud(db)
 
 def wallet():
     # TODO: Set these attributes directly on db table definitions... remove from here when schema.py is completed
-    db.merchantProduct.id.writable = False
-    db.merchantProduct.id.readable = False
-    db.merchantProduct.auth_user_id.writable = False
-    db.merchantProduct.auth_user_id.readable = False
-    db.merchantProduct.priceBTC.writable = False
-    db.merchantProduct.priceBTC.readable = False
-    db.merchantProduct.createDate.writable = False
-    db.merchantProduct.createDate.readable = False
+    db.product.id.writable = False
+    db.product.id.readable = False
+    db.product.auth_user_id.writable = False
+    db.product.auth_user_id.readable = False
+    db.product.price_btc.writable = False
+    db.product.price_btc.readable = False
+    db.product.create_date.writable = False
+    db.product.create_date.readable = False
     grid = SQLFORM.grid(
-        query=db.merchantProduct.auth_user_id==request.vars.auth_user_id,
+        query=db.product.auth_user_id==request.vars.auth_user_id,
         fields=[
-            db.merchantProduct.name,
-            db.merchantProduct.merchantNumber,
-            db.merchantProduct.description,
-            db.merchantProduct.priceUSD,
-            db.merchantProduct.shippingCost],
+            db.product.name,
+            db.product.number,
+            db.product.description,
+            db.product.price_usd,
+            db.product.shipping_cost],
         deletable=True,
         editable=True,
         details=False,
@@ -39,9 +39,9 @@ def wallet():
         user_signature=False,
         csv=False,
         headers={
-            'merchantProduct.name': 'Product Name',
-            'merchantProduct.merchantNumber': 'Merchant ID Number',
-            'merchantProduct.description': 'Description',
-            'merchantProduct.priceUSD': 'Price (USD)',
-            'merchantProduct.shippingCost': 'Shipping Cost'})
+            'product.name': 'Product Name',
+            'product.number': 'Merchant ID Number',
+            'product.description': 'Description',
+            'product.price_usd': 'Price (USD)',
+            'product.shipping_cost': 'Shipping Cost'})
     return dict(grid=grid)
