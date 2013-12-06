@@ -31,13 +31,6 @@ if db(db.global_settings.id > 0).count() == 0:
         max_batch_wait_time=60
         )
 
-# if db(db.auth_user.id > 0).count() == 0:
-    # db.auth_user.insert(
-        # first_name='Anonymous',
-        # last_name='Buyer',
-        # email='anonbuyer@bitbuddy.biz',
-        # password='pbkdf2(1000,20,sha512)$95c1fa7bb0ac650e$583a459eb221a6b9c932d02e0213f0cfa69c1d89')
-
 if db(db.user_status.id > 0).count() == 0:
     db.user_status.insert(description='active')
     db.user_status.insert(description='disabled')
