@@ -65,14 +65,35 @@ auth.settings.extra_fields['auth_user'] = [
     #Field('user_status_id', 'reference user_status', notnull=True, ondelete='NO ACTION', readable=False, writable=False),
     Field('last_login_date', 'datetime', notnull=True, default=request.now, readable=False, writable=False),
     Field('create_date', 'datetime', notnull=True, default=request.now, readable=False, writable=False),
-    Field('update_date', 'datetime', notnull=True, default=request.now, update=request.now, readable=False, writable=False),
-    #Field('test2')
-    ]
+    Field('update_date', 'datetime', notnull=True, default=request.now, update=request.now, readable=False, writable=False)]
+
 #db.auth_user.user_status_id.requires = IS_IN_DB(db, user_status.id)
 
 ## create all tables needed by auth if not custom tables
 # username=False specifies that email is used for login, not username.
 auth.define_tables(username=False, signature=False)
+
+# TODO: Verify links for everything below
+auth.settings.password_min_length = 8
+auth.settings.create_user_groups = False
+auth.settings.login_next = URL('dashboard', 'overview')
+auth.settings.logout_next = URL('index')
+auth.settings.profile_next = URL('index')
+# TODO: After enabling email verification, redirect user to a page with instructions to check their email and click on the link to log in
+auth.settings.register_next = URL('user', args='login')
+auth.settings.retrieve_username_next = URL('index')
+auth.settings.retrieve_password_next = URL('index')
+auth.settings.change_password_next = URL('index')
+auth.settings.request_reset_password_next = URL('user', args='login')
+auth.settings.reset_password_next = URL('user', args='login')
+auth.settings.verify_email_next = URL('user', args='login')
+
+# TODO: Change to true to require email verification before account is created
+auth.settings.registration_requires_verification = False
+auth.settings.registration_requires_approval = False
+auth.settings.reset_password_requires_verification = True
+auth.messages.verify_email = 'Click on the link http://' + request.env.http_host + URL(r=request,c='default',f='user',args=['verify_email']) + '/%(key)s to verify your email'
+auth.messages.reset_password = 'Click on the link http://' + request.env.http_host + URL(r=request,c='default',f='user',args=['reset_password']) + '/%(key)s to reset your password'
 
 ## add groups only if they don't already exist
 def add_group_if_not_exists(group, description):
