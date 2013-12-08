@@ -15,9 +15,6 @@ Author: Henry Nguyen (henry@bitbuddy.biz)
 
 # -*- coding: utf-8 -*-
 
-from bitcoin_client import BitcoinClient
-from bitcoin_exchange import BitcoinExchange
-
 def index():
     """
     example action using the internationalization operator T and flash
@@ -39,15 +36,8 @@ def login_onvalidation(form):
 
 def register_onvalidation(form):
     # TODO: Add a bitcoin account and assign with name = auth.user_id
-
-def main():
-    client = BitcoinClient()
-    exchange = BitcoinExchange()
-    blockcount = client.getblockcount()
-    difficulty = client.getdifficulty()
-    lastPrice = exchange.getlastprice()
-    return dict(blockcount=blockcount, difficulty=difficulty, lastPrice=lastPrice)
-
+    return
+    
 @cache.action()
 def download():
     """

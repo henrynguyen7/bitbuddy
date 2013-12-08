@@ -15,16 +15,19 @@ from bitcoin_client import BitcoinClient
 
 track_changes(True)
 
+@auth.requires_login()
 def getBlockcount():
     client = BitcoinClient()
     blockcount = client.getblockcount()
     return dict(blockcount=str(blockcount))
 
+@auth.requires_login()
 def getDifficulty():
     client = BitcoinClient()
     difficulty = client.getdifficulty()
     return dict(difficulty=str(difficulty))
 
+@auth.requires_login()
 def getConnectionCount():
     client = BitcoinClient()
     connectionCount = client.getconnectioncount()

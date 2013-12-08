@@ -1,0 +1,26 @@
+{{extend 'layout_dashboard.html'}}
+
+<div class="hero-unit">
+    <h1>Welcome!</h1>
+    <p>You can now start managing your BitBuddy account. </p>
+    <p><a href="/bitbuddy/admin/getBlockcount" class="btn btn-primary btn-large">View Blockcount</a></p>
+</div>
+<div class="row-fluid">
+    <div class="span4">
+        <h2>Blockcount</h2>
+        <p>{{=blockcount}}</p>
+        <p><a class="btn" href="#">Refresh &raquo;</a></p>
+    </div><!--/span-->
+        <div class="span4">
+        <h2>Difficulty</h2>
+        <p>{{=difficulty}}</p>
+        <p><a class="btn" href="#">Refresh &raquo;</a></p>
+    </div><!--/span-->
+    <div class="span4">
+        <h2>Last Price</h2>
+        <p>{{=lastPrice}}</p>
+        <p><a class="btn" href="#">Refresh &raquo;</a></p>
+    </div><!--/span-->
+</div><!--/row-->
+
+{{end}}

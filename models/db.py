@@ -76,7 +76,7 @@ auth.define_tables(username=False, signature=False)
 # TODO: Verify links for everything below
 auth.settings.password_min_length = 8
 auth.settings.create_user_groups = False
-auth.settings.login_next = URL('dashboard', 'overview')
+auth.settings.login_next = URL('dashboard', 'index')
 auth.settings.logout_next = URL('index')
 auth.settings.profile_next = URL('index')
 # TODO: After enabling email verification, redirect user to a page with instructions to check their email and click on the link to log in
