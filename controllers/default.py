@@ -29,7 +29,16 @@ def index():
     return dict(message=None)
 
 def user():
+    auth.settings.login_onvalidation = login_onvalidation
+    auth.settings.register_onvalidation = register_onvalidation
     return dict(form=auth())
+
+def login_onvalidation(form):
+    # TODO: increment login_count on login
+    return
+
+def register_onvalidation(form):
+    # TODO: Add a bitcoin account and assign with name = auth.user_id
 
 def main():
     client = BitcoinClient()
