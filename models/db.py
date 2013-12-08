@@ -95,25 +95,6 @@ auth.settings.reset_password_requires_verification = True
 auth.messages.verify_email = 'Click on the link http://' + request.env.http_host + URL(r=request,c='default',f='user',args=['verify_email']) + '/%(key)s to verify your email'
 auth.messages.reset_password = 'Click on the link http://' + request.env.http_host + URL(r=request,c='default',f='user',args=['reset_password']) + '/%(key)s to reset your password'
 
-## add groups only if they don't already exist
-def add_group_if_not_exists(group, description):
-    if not db(db.auth_group.role==group).count():
-        auth.add_group(group, description)
-
-add_group_if_not_exists('admin', 'admin')
-add_group_if_not_exists('user', 'user')
-add_group_if_not_exists('merchant', 'merchant')
-add_group_if_not_exists('buyer', 'buyer')
-
-## define permissions for groups
-## example: auth.add_permission(group_id, 'name', 'object', record_id)
-# TODO: Determine how to add permission when table not defined yet (due to lazy instantiation)
-# TODO: Determine how to allow permissions on only records that belong to that user
-# auth.add_permission('merchant', 'create_product', db.Product, 0)
-# auth.add_permission('merchant', 'read_product', db.Product, 0)
-# auth.add_permission('merchant', 'update_product', db.Product, 0)
-# auth.add_permission('merchant', 'delete_product', db.Product, 0)
-
 ## configure email
 mail = auth.settings.mailer
 ## TODO: Modify for BitBuddy SMTP

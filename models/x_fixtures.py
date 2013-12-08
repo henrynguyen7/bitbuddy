@@ -20,6 +20,25 @@ if RESET:
         db[table].drop()
     db.commit()
 
+## add groups only if they don't already exist
+def add_group_if_not_exists(group, description):
+    if not db(db.auth_group.role==group).count():
+        auth.add_group(group, description)
+
+add_group_if_not_exists('admin', 'admin')
+add_group_if_not_exists('user', 'user')
+add_group_if_not_exists('merchant', 'merchant')
+add_group_if_not_exists('buyer', 'buyer')
+
+## define permissions for groups
+## example: auth.add_permission(group_id, 'name', 'object', record_id)
+# TODO: Determine how to add permission when table not defined yet (due to lazy instantiation)
+# TODO: Determine how to allow permissions on only records that belong to that user
+# auth.add_permission('merchant', 'create_product', db.Product, 0)
+# auth.add_permission('merchant', 'read_product', db.Product, 0)
+# auth.add_permission('merchant', 'update_product', db.Product, 0)
+# auth.add_permission('merchant', 'delete_product', db.Product, 0)
+
 ##
 ## Real seed data needed for all environments, including production.
 ##
