@@ -67,7 +67,7 @@ def purchase_product():
     client = BitcoinClient()
     exchange = BitcoinExchange()
     # TODO: Don't just blindly query for email here... should only display logged-in buyer account info
-    buyer_email = db(db.buyer.id==request.vars.buyer_id).select()[0].email
+    buyer_email = db(db.buyer.id==request.vars.buyer_id).select().first().email
     # TODO: Create a brand new address so we can track the buyer instead of using the general-purpose "getaccountaddress"
     address = client.getaccountaddress(account=str(auth.user.id))
     # TODO: Move account creation into auth_user creation code when available and refactor this to query for account_id
@@ -82,7 +82,7 @@ def purchase_product():
         user_btc_account_id=account_id,
         address=address)
     exchange_rate = exchange.getlastprice()
-    product = db(db.product.id==request.vars.product_id).select()[0]
+    product = db(db.product.id==request.vars.product_id).select().first()
     # btc_transaction_id = db.btc_transaction.insert(
     #     btc_transaction_type_id="""TODO""",
     #     transaction_status_id="""TODO""",
