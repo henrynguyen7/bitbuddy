@@ -39,11 +39,11 @@ response.menu = [
 ]
 
 response.admin_menu = [
-    (T('Home'), False, URL('dashboard', 'index'), []),
-    (T('Wallet'), False, URL('dashboard', 'wallet'), []),
-    (T('Sales'), False, URL('dashboard', 'sales'), []),
-    (T('Products'), False, URL('dashboard', 'products'), []),
-    (T('Settings'), False, URL('dashboard', 'settings'), [])
+    (T('Home'), (request.function=='index'), URL('dashboard', 'index'), []),
+    (T('Wallet'), (request.function=='wallet'), URL('dashboard', 'wallet'), []),
+    (T('Sales'), (request.function=='sales'), URL('dashboard', 'sales'), []),
+    (T('Products'), (request.function=='products'), URL('dashboard', 'products'), []),
+    (T('Settings'), (request.function=='settings'), URL('dashboard', 'settings'), [])
 ]
 
 response.footerMenu = [

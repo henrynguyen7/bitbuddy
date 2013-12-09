@@ -47,7 +47,7 @@
                     <div class="nav-collapse collapse">
                         {{is_mobile=request.user_agent().is_mobile}}
                         {{if response.menu:}}
-                            {{=MENU(response.menu, _class='mobile-menu nav' if is_mobile else 'nav',mobile=is_mobile,li_class='dropdown',ul_class='dropdown-menu')}}
+                            {{=MENU(response.menu, _class='mobile-menu nav' if is_mobile else 'nav',mobile=is_mobile,li_class='dropdown',ul_class='dropdown-menu',li_active='active')}}
                         {{pass}}
                         <form class="navbar-form pull-right" action="/bitbuddy/default/user/logout">
                             <button type="submit" class="btn">Log Out</button>
@@ -62,22 +62,9 @@
             <div class="row-fluid">
                 <div class="span3">
                     <div class="well sidebar-nav">
-                        <ul class="nav nav-list">
-                            {{if response.admin_menu:}}
-                                {{=MENU(response.admin_menu, _class='nav-header' if is_mobile else 'nav',mobile=is_mobile,li_class='nav-header',ul_class='nav-header')}}
-                            {{pass}}
-                            <!-- <li class="nav-header">Wallet</li>
-                            <li><a href="#">Transactions</a></li>
-                            <li><a href="#">Send</a></li>
-                            <li><a href="#">Receive</a></li>
-                            <li class="nav-header">Merchant Tools</li>
-                            <li><a href="#">Sales</a></li>
-                            <li><a href="{{=URL('product', 'product.html')}}">Products</a></li>
-                            <li class="nav-header">Settings</li>
-                            <li><a href="#">Link</a></li>
-                            <li><a href="#">Link</a></li>
-                            <li><a href="#">Link</a></li> -->
-                        </ul>
+                        {{if response.admin_menu:}}
+                            {{=MENU(response.admin_menu, _class='nav-header' if is_mobile else 'nav nav-list',mobile=is_mobile,li_class='nav-header',ul_class='nav-header',li_active='active')}}
+                        {{pass}}
                     </div>
                 </div>  
                 <div class="span9">
