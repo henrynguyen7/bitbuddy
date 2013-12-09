@@ -33,66 +33,67 @@
     </head>
 
     <body>
-        <!-- Header ================================================== -->
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="navbar-inner">
-                <div class="container">
-                    <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    {{=response.logo or 'BitBuddy'}}      
-                    <!-- <ul id="navbar" class="nav pull-right">{{='auth' in globals() and auth.navbar(mode="dropdown") or ''}}</ul> -->
-                    <div class="nav-collapse collapse">
-                        {{is_mobile=request.user_agent().is_mobile}}
-                        {{if response.menu:}}
-                            {{=MENU(response.menu, _class='mobile-menu nav' if is_mobile else 'nav',mobile=is_mobile,li_class='dropdown',ul_class='dropdown-menu',li_active='active')}}
-                        {{pass}}
-                        <form class="navbar-form pull-right" action="/bitbuddy/default/user/logout">
-                            <button type="submit" class="btn">Log Out</button>
-                        </form>
+
+        <div id="wrap">
+
+            <!-- Header ================================================== -->
+            <div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="navbar-inner">
+                    <div class="container">
+                        <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        {{=response.logo or 'BitBuddy'}}      
+                        <!-- <ul id="navbar" class="nav pull-right">{{='auth' in globals() and auth.navbar(mode="dropdown") or ''}}</ul> -->
+                        <div class="nav-collapse collapse">
+                            {{is_mobile=request.user_agent().is_mobile}}
+                            {{if response.menu:}}
+                                {{=MENU(response.menu, _class='mobile-menu nav' if is_mobile else 'nav',mobile=is_mobile,li_class='dropdown',ul_class='dropdown-menu',li_active='active')}}
+                            {{pass}}
+                            <form class="navbar-form pull-right" action="/bitbuddy/default/user/logout">
+                                <button type="submit" class="btn">Log Out</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="container-fluid">
-            <!-- Left Navigation ================================================== -->
-            <div class="row-fluid">
-                <div class="span3">
-                    <div class="well sidebar-nav">
-                        {{if response.admin_menu:}}
-                            {{=MENU(response.admin_menu, _class='nav-header' if is_mobile else 'nav nav-list',mobile=is_mobile,li_class='nav-header',ul_class='nav-header',li_active='active')}}
-                        {{pass}}
-                    </div>
-                </div>  
-                <div class="span9">
+            <!-- Middle Container ================================================== -->
+            <div class="container-fluid top-pad">
+                <div class="row-fluid">
+
+                    <!-- Left Navigation ================================================== -->
+                    <div class="span3">
+                        <div class="well sidebar-nav">
+                            {{if response.admin_menu:}}
+                                {{=MENU(response.admin_menu, _class='nav-header' if is_mobile else 'nav nav-list',mobile=is_mobile,li_class='nav-header',ul_class='nav-header',li_active='active')}}
+                            {{pass}}
+                        </div>
+                    </div>  
+
                     <!-- Center ================================================== -->
-                    {{block center}}  
-                    {{include}}
-                    {{end}}
-
-                    <!-- Development menu... TODO: REMOVE IN PRODUCTION -->
-                    {{=response.toolbar()}}
-                </div>
-            </div>
-            <hr>
-        </div>
-
-        <div class="container">
-            <!-- Footer ================================================== -->
-            <div class="row">
-                <footer class="footer span12" id="footer">
-                    <div class="footer-content"> 
-                        {{block footer}}
-                        <div class="copyright pull-left">&copy; {{=request.now.year}} {{=T('BitBuddy')}} &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></div>
-                        <p class="pull-right"><a href="#">Back to top</a></p>
+                    <div class="span9">
+                        {{block center}}  
+                        {{include}}
                         {{end}}
+
+                        <!-- Development menu... TODO: REMOVE IN PRODUCTION -->
+                        {{=response.toolbar()}}
                     </div>
-                </footer>
-            </div>  
+                </div>
+                <hr>
+            </div>
         </div>
+
+        <!-- Footer ================================================== -->
+        <footer id="footer">            
+            {{block footer}}
+            <div class="copyright pull-left">&copy; {{=request.now.year}} {{=T('BitBuddy')}} &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></div>
+            <p class="pull-right"><a href="#">Back to top</a></p>
+            {{end}}
+        </footer>
 
         <script src="../static/js/bootstrap.min.js"></script>
         <script src="../static/js/jquery-2.0.2.min.js"></script>
