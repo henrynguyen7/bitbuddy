@@ -46,7 +46,7 @@ response.admin_menu = [
     (T('Settings'), (request.function=='settings'), URL('dashboard', 'settings'), [])
 ]
 
-response.footerMenu = [
+response.footer_menu = [
     (T('BitBuddy'), False, URL('default', 'index'), []),
     (T('Privacy'), False, URL('default', 'index'), []),
     (T('Terms'), False, URL('default', 'index'), [])
