@@ -96,10 +96,3 @@ if db(db.request_type.id > 0).count() == 0:
 if db(db.order_type.id > 0).count() == 0:
     db.order_type.insert(description='buy')
     db.order_type.insert(description='sell')
-
-
-##
-## Seed data for testing/QA only. In production, most of this should be entered
-## using appadmin or some other UI like that. The rest should be entered 
-## programmatically by our code.
-##
