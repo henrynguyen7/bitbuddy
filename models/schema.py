@@ -143,8 +143,8 @@ db.define_table('exchange',
     )
 
 db.define_table('exchange_quote',
-    # There is a circular reference on ForeignKeys here and should be rewritten - there's already a note about that in the btcTransactionStatus table
-    Field('btc_transaction_merchant_id', 'reference btc_transaction_merchant', notnull=True, ondelete='NO ACTION'),
+    # There is a circular reference on ForeignKeys here and should be rewritten
+    #Field('btc_transaction_merchant_id', 'reference btc_transaction_merchant', notnull=True, ondelete='NO ACTION'),
     Field('exchange_id', 'reference exchange', notnull=True, ondelete='NO ACTION'),
     Field('exchange_rate', 'decimal(12,2)', notnull=True),  # USD per BTC 
     Field('create_date', 'datetime', notnull=True, default=request.now, readable=False, writable=False),

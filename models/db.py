@@ -43,8 +43,12 @@ mysql_database = resource_data["mysql"]["database"]
 mysql_host = resource_data["mysql"]["host"]
 mysql_port = resource_data["mysql"]["port"]
 
-db = DAL('mysql://' + mysql_username + ':' + mysql_password + '@' + mysql_host + '/' + mysql_database, pool_size=3, check_reserved=['mysql'])
-#db = DAL('mysql://' + mysql_username + ':' + mysql_password + '@' + mysql_host + '/' + mysql_database, pool_size=3, check_reserved=['mysql'], migrate=False) #, lazy_tables=True
+# Use during normal runtime
+db = DAL('mysql://' + mysql_username + ':' + mysql_password + '@' + mysql_host + '/' + mysql_database, pool_size=3, check_reserved=['mysql'], migrate=False)
+# Use to rebuild/update schema
+#db = DAL('mysql://' + mysql_username + ':' + mysql_password + '@' + mysql_host + '/' + mysql_database, pool_size=3, check_reserved=['mysql'])
+# Use during normal runtime if schema updates are desired
+#db = DAL('mysql://' + mysql_username + ':' + mysql_password + '@' + mysql_host + '/' + mysql_database, pool_size=3, check_reserved=['mysql'], lazy_tables=True)
 # The migrate=False parameter prevents automatic modification of schema if it differs from its definition here. Schema mods should be done deliberately and manually.
 # With lazy_tables=True, tables will be created only when accessed, which speeds up the code.
 # Resulting connection string can be shown using: print db._uri
