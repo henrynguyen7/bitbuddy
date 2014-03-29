@@ -18,16 +18,12 @@ from bitcoinrpc import AuthServiceProxy
 # load bitcoind client login credentials from resource file
 dir = os.path.dirname(__file__)
 resourceFile = os.path.join(dir, "../private", "resources.json")
-resource = open(resourceFile, 'r')
-resourceData = json.load(resource)
-resource.close()
+resource_file = os.path.join(request.folder, "private", "resources.json")
+with open(resource_file) as resource:
+    resource_data = json.load(resource)
 
 # TODO: Put these into a dict or some other Python data struct for this kinda thing
-bitcoindUsername = resourceData["bitcoind"]["username"]
-bitcoindPassword = resourceData["bitcoind"]["password"]
-bitcoindProtocol = resourceData["bitcoind"]["protocol"]
-bitcoindIP = resourceData["bitcoind"]["ip"]
-bitcoindPort = resourceData["bitcoind"]["port"]
+bitcoind_username, bitcoind_password, bitcoind_protocol, bitcoind_ip, bitcoind_port = resource_data["bitcoind"]["username"], resource_data["bitcoind"]["password"], resource_data["bitcoind"]["protocol"], resource_data["bitcoind"]["ip"], resource_data["bitcoind"]["port"]
 
 class BitcoinClient(object):
     # TODO: Figure out how to implement this class as a Singleton
@@ -35,7 +31,7 @@ class BitcoinClient(object):
     
     def __init__(self):
         """Initializes the class with the bitcoind client."""
-        self.bitcoind = AuthServiceProxy(bitcoindProtocol + "://" + bitcoindUsername + ":" + bitcoindPassword + "@" + bitcoindIP + ":" + bitcoindPort)  
+        self.bitcoind = AuthServiceProxy(bitcoind_protocol + "://" + bitcoind_username + ":" + bitcoind_password + "@" + bitcoind_ip + ":" + bitcoind_port)  
         
     # def addmultisigaddress(self, nrequired, ["key","key"], account=None):
     #     """Add a nrequired-to-sign multisignature address to the wallet.

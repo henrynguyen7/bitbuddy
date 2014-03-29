@@ -32,9 +32,8 @@ if request.env.http_origin:
 
 # load mysql login credentials from resource file
 resource_file = os.path.join(request.folder, "private", "resources.json")
-resource = open(resource_file, 'r')
-resource_data = json.load(resource)
-resource.close()
+with open(resource_file) as resource:
+    resource_data = json.load(resource)
 
 # TODO: Put these into a dict or some other Python data struct for this kinda thing
 mysql_username = resource_data["mysql"]["username"]
